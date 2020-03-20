@@ -4,7 +4,7 @@ using System.ServiceModel;
 
 namespace D365.Plugins
 {
-	public class SumCalculateForContact
+	public class CalculateEmployeeTotalIncome
 	{
 		public void Execute(IServiceProvider serviceProvider)
 		{

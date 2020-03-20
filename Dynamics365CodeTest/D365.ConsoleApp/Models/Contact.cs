@@ -8,7 +8,7 @@ namespace D365.ConsoleApp.Models
 {
     public class Contact
     {
-        public void UpdateContactTotalIncome(string totalIncome, IOrganizationService service)
+        public void UpdateEmployeeTotalIncome(string totalIncome, IOrganizationService service)
         {
             var contact = new Entity("contact");
             contact["neu_totalincome"] = totalIncome;
@@ -17,7 +17,7 @@ namespace D365.ConsoleApp.Models
 
         }
 
-        public bool IsContactDuplicate(string email)
+        public bool IsEmployeeDuplicate(string email)
         {
             /// logic goes here
             return true;

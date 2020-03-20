@@ -58,8 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SumCalculateForContact.cs" />
-    <Compile Include="DuplicateCheck.cs" />
+    <Compile Include="CalculateEmployeeTotalIncome.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Helper\PluginBase.cs" />
     <Compile Include="Model\EmployeeRequest.cs" />

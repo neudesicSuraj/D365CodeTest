@@ -33,15 +33,14 @@ namespace D365.ConsoleApp
                         Console.WriteLine("Please enter total income to update\n");
                         var totalIncome = Console.ReadLine();
 
-                        contact.UpdateContactTotalIncome(totalIncome, crmService);
+                        contact.UpdateEmployeeTotalIncome(totalIncome, crmService);
                         break;
                     case "2":
                         Console.WriteLine("Please enter email of contact to check:\n");
                         var email = Console.ReadLine();
 
-                        
-
-                        var isDuplicate = IsContactDuplicate(email);
+                        var isDuplicate = IsEmployeeDuplicate(email);
+                        Console.WriteLine("An employee with same email already exists");
                         break;
                     default:
                         Console.WriteLine("Invalid Input. Please run application again.");
