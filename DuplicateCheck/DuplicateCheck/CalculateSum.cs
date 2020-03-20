@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace D365.Plugins
 {
-    public class DuplicateCheck
+    public class CalculateSum
     {
         public void Execute(IServiceProvider serviceProvider)
         {
@@ -26,22 +26,38 @@ namespace D365.Plugins
                 // Obtain the organization service reference which you will need for  
                 // web service calls.  
                 IOrganizationServiceFactory serviceFactory =
-                    (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
-                IOrganizationService service = serviceFactory.CreateOrganizationService(context.UserId);
+                   serviceProvider.GetService(typeof(IOrganizationServiceFactory));
+                var service = serviceFactory.CreateOrganizationService(context.UserId);
 
                 try
                 {
-                   
+                    if (context.MessageName == "UPDATE")
+                    {
+                        if (entity.LogicalName == "CONTACT")
+                        {
+                            var preImageContact = context.PreEntityImages["PREIMAGE"];
+                            var employerSalary = preImageContact["neu_employersalary"];
+                            var otherIncome = preImageContact.GetAttributeValue<int>("neu_othersalary");
+
+                            var helper = new Helper();
+
+                            var totalIncome = (int)helper.Sum(employerSalary, otherIncome);
+
+                            entity["neu_totalincome"] = totalIncome;
+
+                            service.Update(entity);
+                        }
+                    }
                 }
 
                 catch (FaultException<OrganizationServiceFault> ex)
                 {
-                    throw new InvalidPluginExecutionException("An error occurred in FollowUpPlugin.", ex);
+                    throw new InvalidPluginExecutionException("An error occurred in plugin.", ex);
                 }
 
                 catch (Exception ex)
                 {
-                    tracingService.Trace("FollowUpPlugin: {0}", ex.ToString());
+                    tracingService.Trace("Plugin: {0}", ex.ToString());
                     throw;
                 }
             }
