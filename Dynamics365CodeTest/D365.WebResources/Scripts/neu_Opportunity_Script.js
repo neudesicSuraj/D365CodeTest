@@ -1,0 +1,1 @@
+﻿//Follow the recommended scripting practices for Dynamics 365.
